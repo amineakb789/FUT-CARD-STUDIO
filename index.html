@@ -1,0 +1,390 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>FUT Card Studio - Générateur de Cartes Ultimate Team</title>
+    <link rel="stylesheet" href="style.css">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <!-- html2canvas pour le téléchargement PNG HD -->
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/html2canvas/1.4.1/html2canvas.min.js"></script>
+</head>
+<body>
+
+    <!-- En-tête / Navigation sticky -->
+    <header class="site-header">
+        <div class="logo">
+            <i class="fa-solid fa-bolt"></i> <span>FUT CARD STUDIO</span>
+        </div>
+        <nav class="nav-links">
+            <a href="#home" class="nav-link active">Accueil</a>
+            <a href="#templates" class="nav-link">Modèles</a>
+            <a href="#showcase" class="nav-link">Légendes</a>
+            <a href="#creator" class="nav-link">Studio Créateur</a>
+            <a href="#collection" class="nav-link">Ma Collection (<span id="collection-count">0</span>)</a>
+            <a href="#faq" class="nav-link">FAQ</a>
+        </nav>
+        <div class="header-action">
+            <a href="#creator" class="btn-primary">Créer ma Carte <i class="fa-solid fa-arrow-right"></i></a>
+        </div>
+    </header>
+
+    <main>
+        <!-- 1. HERO SECTION ENRICHIE -->
+        <section id="home" class="hero-section">
+            <div class="hero-container">
+                <div class="hero-content">
+                    <span class="badge-sub"><i class="fa-solid fa-sparkles"></i> L'expérience Ultimate Team Réinventée</span>
+                    <h1>Forgéz Votre Légende.<br>Créez Votre Carte EA FC.</h1>
+                    <p>Concevez des cartes de football ultra-réalistes inspirées de FIFA & EA FC 24. Ajustez chaque statistique, appliquez des effets 3D holographiques et téléchargez votre création en qualité Ultra HD.</p>
+                    
+                    <div class="hero-buttons">
+                        <a href="#creator" class="btn-primary btn-lg">Ouvrir le Studio <i class="fa-solid fa-wand-magic-sparkles"></i></a>
+                        <a href="#showcase" class="btn-secondary btn-lg">Explorer les Légendes <i class="fa-solid fa-star"></i></a>
+                    </div>
+
+                    <!-- Compteurs Statistiques de la Communauté -->
+                    <div class="community-stats">
+                        <div class="stat-box">
+                            <span class="stat-number">125K+</span>
+                            <span class="stat-label">Cartes Générées</span>
+                        </div>
+                        <div class="stat-divider"></div>
+                        <div class="stat-box">
+                            <span class="stat-number">4.9/5</span>
+                            <span class="stat-label">Note Communauté</span>
+                        </div>
+                        <div class="stat-divider"></div>
+                        <div class="stat-box">
+                            <span class="stat-number">100%</span>
+                            <span class="stat-label">Gratuit & HD</span>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- CARTE HERO PREMUM 3D (Substitut de la carte jaune) -->
+                <div class="hero-visual">
+                    <div class="card-wrapper-3d" id="hero-3d-wrapper">
+                        <div class="fut-card toty hero-card-animated" id="hero-interactive-card">
+                            <div class="card-glare"></div>
+                            <div class="card-top">
+                                <div class="player-meta">
+                                    <span class="card-rating">99</span>
+                                    <span class="card-position">ST</span>
+                                    <span class="card-nation">🇫🇷</span>
+                                    <span class="card-club">👑</span>
+                                </div>
+                                <div class="player-image-container">
+                                    <img src="https://images.unsplash.com/photo-1508098682722-e99c43a406b2?w=500" alt="Légende EA FC">
+                                </div>
+                            </div>
+                            <div class="card-bottom">
+                                <div class="player-name">ULTIMATE ICON</div>
+                                <div class="player-divider"></div>
+                                <div class="player-stats">
+                                    <div class="stats-column">
+                                        <div class="stat-item"><span class="stat-val">99</span><span class="stat-lbl">PAC</span></div>
+                                        <div class="stat-item"><span class="stat-val">98</span><span class="stat-lbl">SHO</span></div>
+                                        <div class="stat-item"><span class="stat-val">95</span><span class="stat-lbl">PAS</span></div>
+                                    </div>
+                                    <div class="stats-column">
+                                        <div class="stat-item"><span class="stat-val">99</span><span class="stat-lbl">DRI</span></div>
+                                        <div class="stat-item"><span class="stat-val">65</span><span class="stat-lbl">DEF</span></div>
+                                        <div class="stat-item"><span class="stat-val">92</span><span class="stat-lbl">PHY</span></div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- 2. GALERIE DES LÉGENDES / PRESETS INTERACTIFS -->
+        <section id="showcase" class="page-section bg-darker">
+            <div class="section-header text-center">
+                <span class="badge-sub">-- INSPIRATION & PRESETS</span>
+                <h2>Modèles de Légendes Prêts à l'Emploi</h2>
+                <p>Cliquez sur n'importe quelle star pour charger instantanément son profil dans le Studio.</p>
+            </div>
+            
+            <div class="showcase-grid">
+                <div class="preset-card" onclick="loadPreset('mbappe')">
+                    <div class="preset-badge">TOTY 97</div>
+                    <h3>K. Mbappé</h3>
+                    <p>ST • France • Real Madrid</p>
+                    <button class="btn-sm"><i class="fa-solid fa-arrow-down-long"></i> Charger</button>
+                </div>
+                <div class="preset-card" onclick="loadPreset('messi')">
+                    <div class="preset-badge">ICON 98</div>
+                    <h3>L. Messi</h3>
+                    <p>RW • Argentine • Inter Miami</p>
+                    <button class="btn-sm"><i class="fa-solid fa-arrow-down-long"></i> Charger</button>
+                </div>
+                <div class="preset-card" onclick="loadPreset('haaland')">
+                    <div class="preset-badge">TOTS 96</div>
+                    <h3>E. Haaland</h3>
+                    <p>ST • Norvège • Man City</p>
+                    <button class="btn-sm"><i class="fa-solid fa-arrow-down-long"></i> Charger</button>
+                </div>
+                <div class="preset-card" onclick="loadPreset('zidane')">
+                    <div class="preset-badge">ICON 96</div>
+                    <h3>Z. Zidane</h3>
+                    <p>CAM • France • Icon</p>
+                    <button class="btn-sm"><i class="fa-solid fa-arrow-down-long"></i> Charger</button>
+                </div>
+            </div>
+        </section>
+
+        <!-- 3. SELECTION DES MODÈLES DE CARTES -->
+        <section id="templates" class="page-section">
+            <div class="section-header">
+                <span class="badge-sub">-- CHOIX DU DESIGN</span>
+                <h2>Sélectionnez un Style de Carte</h2>
+                <p>Choisissez parmi les designs les plus populaires d'EA FC et FIFA Ultimate Team.</p>
+            </div>
+            <div class="templates-grid">
+                <div class="template-card active" data-template="toty">
+                    <div class="t-badge">XI</div>
+                    <h3>TOTY EA FC</h3>
+                    <p>Édition Équipe de l'Année</p>
+                </div>
+                <div class="template-card" data-template="gold-rare">
+                    <div class="t-badge">R</div>
+                    <h3>GOLD RARE</h3>
+                    <p>Édition Classique</p>
+                </div>
+                <div class="template-card" data-template="tots">
+                    <div class="t-badge">T</div>
+                    <h3>TOTS BLUE</h3>
+                    <p>Équipe de la Saison</p>
+                </div>
+                <div class="template-card" data-template="icon">
+                    <div class="t-badge">★</div>
+                    <h3>ICON GOLD</h3>
+                    <p>Légendes Immortelles</p>
+                </div>
+                <div class="template-card" data-template="totw">
+                    <div class="t-badge">IF</div>
+                    <h3>TOTW BLACK</h3>
+                    <p>Équipe de la Semaine</p>
+                </div>
+                <div class="template-card" data-template="hero">
+                    <div class="t-badge">H</div>
+                    <h3>FUT HEROES</h3>
+                    <p>Héros du Football</p>
+                </div>
+                <div class="template-card" data-template="ucl">
+                    <div class="t-badge">★</div>
+                    <h3>UCL NIGHTS</h3>
+                    <p>Ligue des Champions</p>
+                </div>
+                <div class="template-card" data-template="futties">
+                    <div class="t-badge">F</div>
+                    <h3>FUTTIES PINK</h3>
+                    <p>Édition Spéciale Été</p>
+                </div>
+            </div>
+        </section>
+
+        <!-- 4. STUDIO CREATION (FORMULAIRE & PREVIEW LIVE) -->
+        <section id="creator" class="page-section bg-darker">
+            <div class="studio-container">
+                <!-- Colonne Formulaire -->
+                <div class="studio-form-column">
+                    <div class="studio-title-bar">
+                        <h3>PROFIL DU JOUEUR</h3>
+                        <label class="auto-calc-toggle">
+                            <input type="checkbox" id="toggle-autocalc" checked>
+                            <span>Calcul OVR Automatique</span>
+                        </label>
+                    </div>
+                    
+                    <div class="form-row">
+                        <div class="form-group">
+                            <label>NOM DU JOUEUR *</label>
+                            <input type="text" id="input-name" value="ALEX MORGAN" maxlength="16">
+                        </div>
+                        <div class="form-group">
+                            <label>NOTE GÉNÉRALE (OVR) *</label>
+                            <input type="number" id="input-ovr" value="92" min="1" max="99">
+                        </div>
+                    </div>
+
+                    <div class="form-group">
+                        <label>POSTE SUR LE TERRAIN *</label>
+                        <div class="positions-grid" id="position-selector">
+                            <button type="button" class="pos-btn active" data-pos="ST">ST</button>
+                            <button type="button" class="pos-btn" data-pos="CF">CF</button>
+                            <button type="button" class="pos-btn" data-pos="LW">LW</button>
+                            <button type="button" class="pos-btn" data-pos="RW">RW</button>
+                            <button type="button" class="pos-btn" data-pos="CAM">CAM</button>
+                            <button type="button" class="pos-btn" data-pos="CM">CM</button>
+                            <button type="button" class="pos-btn" data-pos="CDM">CDM</button>
+                            <button type="button" class="pos-btn" data-pos="CB">CB</button>
+                            <button type="button" class="pos-btn" data-pos="LB">LB</button>
+                            <button type="button" class="pos-btn" data-pos="RB">RB</button>
+                            <button type="button" class="pos-btn" data-pos="GK">GK</button>
+                        </div>
+                    </div>
+
+                    <div class="form-row">
+                        <div class="form-group">
+                            <label>NATIONALITÉ</label>
+                            <select id="input-nation">
+                                <option value="🇫🇷">France</option>
+                                <option value="🇦🇷">Argentine</option>
+                                <option value="🇧🇷">Brésil</option>
+                                <option value="🇳🇬" selected>Nigeria</option>
+                                <option value="🇪🇸">Espagne</option>
+                                <option value="🇩🇪">Allemagne</option>
+                                <option value="🇬🇧">Angleterre</option>
+                                <option value="🇵🇹">Portugal</option>
+                            </select>
+                        </div>
+                        <div class="form-group">
+                            <label>CLUB / SYMBOLE</label>
+                            <input type="text" id="input-club" value="NORTHSTAR FC">
+                        </div>
+                    </div>
+
+                    <div class="form-row">
+                        <div class="form-group">
+                            <label>PHOTO DU JOUEUR</label>
+                            <div class="file-upload-box">
+                                <i class="fa-solid fa-cloud-arrow-up"></i>
+                                <span>Importer une image</span>
+                                <input type="file" id="input-photo" accept="image/*">
+                            </div>
+                        </div>
+                        <div class="form-group">
+                            <label>RÉGLAGES PHOTO (ZOOM / X / Y)</label>
+                            <div class="photo-controls-inline">
+                                <input type="range" id="photo-zoom" min="50" max="200" value="100" title="Zoom">
+                                <input type="range" id="photo-pos-x" min="-50" max="50" value="0" title="Position Horizontale">
+                                <input type="range" id="photo-pos-y" min="-50" max="50" value="0" title="Position Verticale">
+                            </div>
+                        </div>
+                    </div>
+
+                    <h3>STATISTIQUES DU JOUEUR (1-99)</h3>
+                    <div class="attributes-grid" id="attributes-container">
+                        <div class="attr-group">
+                            <label id="lbl-stat1">PAC</label>
+                            <input type="number" id="stat-1" value="89" min="1" max="99">
+                        </div>
+                        <div class="attr-group">
+                            <label id="lbl-stat2">SHO</label>
+                            <input type="number" id="stat-2" value="91" min="1" max="99">
+                        </div>
+                        <div class="attr-group">
+                            <label id="lbl-stat3">PAS</label>
+                            <input type="number" id="stat-3" value="87" min="1" max="99">
+                        </div>
+                        <div class="attr-group">
+                            <label id="lbl-stat4">DRI</label>
+                            <input type="number" id="stat-4" value="93" min="1" max="99">
+                        </div>
+                        <div class="attr-group">
+                            <label id="lbl-stat5">DEF</label>
+                            <input type="number" id="stat-5" value="48" min="1" max="99">
+                        </div>
+                        <div class="attr-group">
+                            <label id="lbl-stat6">PHY</label>
+                            <input type="number" id="stat-6" value="82" min="1" max="99">
+                        </div>
+                    </div>
+
+                    <div class="studio-actions">
+                        <button class="btn-primary" id="btn-generate"><i class="fa-solid fa-bookmark"></i> Sauvegarder dans ma Collection</button>
+                        <button class="btn-secondary" id="btn-download"><i class="fa-solid fa-download"></i> Télécharger PNG HD</button>
+                        <button class="btn-danger" id="btn-reset"><i class="fa-solid fa-rotate-right"></i> Réinitialiser</button>
+                    </div>
+                </div>
+
+                <!-- Colonne Aperçu Live -->
+                <div class="studio-preview-column">
+                    <div class="preview-header">
+                        <h3>APERÇU EN TEMPS RÉEL</h3>
+                        <span class="live-dot" title="Actif"></span>
+                    </div>
+                    
+                    <div class="card-render-wrapper" id="card-export-target">
+                        <div id="active-fut-card" class="fut-card toty">
+                            <div class="card-glare"></div>
+                            <div class="card-top">
+                                <div class="player-meta">
+                                    <span id="preview-ovr" class="card-rating">92</span>
+                                    <span id="preview-pos" class="card-position">ST</span>
+                                    <span id="preview-nation" class="card-nation">🇳🇬</span>
+                                    <span id="preview-club-crest" class="card-club">⭐</span>
+                                </div>
+                                <div class="player-image-container">
+                                    <img id="preview-img" src="https://images.unsplash.com/photo-1534528741775-53994a69daeb?w=300" alt="Photo Joueur">
+                                </div>
+                            </div>
+                            <div class="card-bottom">
+                                <div id="preview-name" class="player-name">ALEX MORGAN</div>
+                                <div class="player-divider"></div>
+                                <div class="player-stats">
+                                    <div class="stats-column">
+                                        <div class="stat-item"><span id="val-stat1" class="stat-val">89</span><span id="label-stat1" class="stat-lbl">PAC</span></div>
+                                        <div class="stat-item"><span id="val-stat2" class="stat-val">91</span><span id="label-stat2" class="stat-lbl">SHO</span></div>
+                                        <div class="stat-item"><span id="val-stat3" class="stat-val">87</span><span id="label-stat3" class="stat-lbl">PAS</span></div>
+                                    </div>
+                                    <div class="stats-column">
+                                        <div class="stat-item"><span id="val-stat4" class="stat-val">93</span><span id="label-stat4" class="stat-lbl">DRI</span></div>
+                                        <div class="stat-item"><span id="val-stat5" class="stat-val">48</span><span id="label-stat5" class="stat-lbl">DEF</span></div>
+                                        <div class="stat-item"><span id="val-stat6" class="stat-val">82</span><span id="label-stat6" class="stat-lbl">PHY</span></div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                    <p class="preview-hint"><i class="fa-solid fa-lightbulb"></i> Survolez la carte pour voir l'effet 3D holographique.</p>
+                </div>
+            </div>
+        </section>
+
+        <!-- 5. SECTION COLLECTION LOCALE -->
+        <section id="collection" class="page-section">
+            <div class="section-header text-center">
+                <span class="badge-sub">-- MES CRÉATIONS</span>
+                <h2>Ma Collection Personnelle</h2>
+                <p>Retrouvez, téléchargez ou supprimez vos cartes enregistrées sur cet appareil.</p>
+            </div>
+            <div class="collection-grid" id="collection-grid-container">
+                <!-- Injected by JavaScript -->
+            </div>
+        </section>
+
+        <!-- 6. SECTION FAQ ACCORDION -->
+        <section id="faq" class="page-section bg-darker">
+            <div class="section-header text-center">
+                <span class="badge-sub">-- EN SAVOIR PLUS</span>
+                <h2>Foire Aux Questions</h2>
+            </div>
+            <div class="faq-container">
+                <div class="faq-item">
+                    <div class="faq-question"><span>Comment télécharger ma carte en haute qualité ?</span> <i class="fa-solid fa-chevron-down"></i></div>
+                    <div class="faq-answer">Cliquez simplement sur le bouton "Télécharger PNG HD" dans le studio. Le site extrait uniquement votre carte avec une résolution doublée, idéale pour le partage sur les réseaux sociaux.</div>
+                </div>
+                <div class="faq-item">
+                    <div class="faq-question"><span>Le calcul de la note générale est-il exact ?</span> <i class="fa-solid fa-chevron-down"></i></div>
+                    <div class="faq-answer">Notre moteur utilise une formule pondérée selon le poste sélectionné (les attaquants privilégient la vitesse et le tir, tandis que les défenseurs privilégient le physique et la défense). Vous pouvez désactiver ce calcul automatique à tout moment via le bouton en haut du formulaire.</div>
+                </div>
+                <div class="faq-item">
+                    <div class="faq-question"><span>Mes cartes créées sont-elles conservées après la fermeture du navigateur ?</span> <i class="fa-solid fa-chevron-down"></i></div>
+                    <div class="faq-answer">Oui, vos cartes sont enregistrées dans le stockage local de votre navigateur (localStorage). Elles resteront disponibles dans votre collection lors de votre prochaine visite.</div>
+                </div>
+            </div>
+        </section>
+    </main>
+
+    <footer class="site-footer">
+        <p>&copy; 2026 FUT Card Studio — Conçu avec passion pour les fans d'EA FC & FUT. Projet purement récréatif.</p>
+    </footer>
+
+    <script src="script.js"></script>
+</body>
+</html>
